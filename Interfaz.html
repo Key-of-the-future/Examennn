@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breath of the Wild - Weapon Menu</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Beaufort+for+LOL:wght@700&display=swap');
+
+
+  :root{
+  --bg-url: url('img/fondito Zelda.jpg');
+    }
+
+   body {
+    margin: 0;
+    background: url("IMG/Fondito\ Zelda.jpg") no-repeat center center/cover;
+    height: 100vh;
+    font-family: 'Beaufort for LOL', sans-serif;
+    color: #f0f0f0;
+    overflow: hidden;
+  }
+
+  .overlay{ 
+  position:fixed; 
+  inset:0; 
+  background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.85) 100%); 
+  pointer-events:none; 
+  z-index:0;
+  }
+
+  /* ================= HUD SUPERIOR ================= */
+  .hud {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    z-index: 10;
+  }
+
+  .hud-left {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hearts {
+    display: flex;
+    gap: 5px;
+  }
+
+  .heart {
+    width: 24px;
+    height: 24px;
+    background: url("IMG/Corazoncito.png") no-repeat center/contain;
+  }
+
+
+  .hud-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hud-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2em;
+    color: #0ff;
+  }
+
+  .rupi-icon {
+    width: 24px;
+    height: 24px;
+    background: url('IMG/Rupia.webp') no-repeat center/contain;
+  }
+
+  /* ================= MENU PRINCIPAL ================= */
+  .menu {
+    display: flex;
+    background: rgba(10, 15, 20, 0.8);
+    border: 2px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    margin: auto;
+    margin-top: 60px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    padding: 20px;
+  }
+
+  .weapon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    flex: 1;
+    padding-right: 30px;
+  }
+
+  .weapon {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    transition: 0.2s;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .weapon img {
+    max-width: 80%;
+    filter: brightness(0.85);
+  }
+
+  .weapon:hover {
+    border-color: #00bcd4;
+    box-shadow: 0 0 10px #00bcd4;
+  }
+
+  .weapon.selected {
+    border-color: #00e0ff;
+    box-shadow: 0 0 20px #00e0ff;
+  }
+
+  .attack {
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .attack img {
+    width: 14px;
+    filter: brightness(1.5);
+  }
+
+  .element-icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    display: none;
+  }
+
+  .weapon-info {
+    flex: 1.2;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 2px solid rgba(0, 255, 255, 0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .weapon-info img {
+    width: 60%;
+    margin: 0 auto 20px;
+    display: block;
+    filter: drop-shadow(0 0 10px #00ffff80);
+  }
+
+  .weapon-name {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #e0faff;
+  }
+
+  .weapon-attack,
+  .weapon-element {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #aaf7ff;
+  }
+
+  .weapon-attack img,
+  .weapon-element img {
+    width: 18px;
+  }
+
+  .weapon-desc {
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #d4faff;
+    opacity: 0.85;
+  }
+</style>
+</head>
+<body>
+
+<!-- HUD -->
+<div class="hud">
+  <div class="hud-left">
+    <div class="hearts" id="hearts">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+    <div class="temperature">
+      <div class="temperature-inner"></div>
+    </div>
+  </div>
+  <div class="hud-center">
+    <div class="stamina">
+      <div class="stamina-fill"></div>
+    </div>
+  </div>
+  <div class="hud-right">
+    <div class="rupi-icon"></div>
+    <span id="rupees">13214</span>
+  </div>
+</div>
+
+<!-- MENU PRINCIPAL -->
+<div class="menu">
+  <div class="weapon-grid" id="weaponGrid">
+    <!-- Armas (12) -->
+    <div class="weapon selected" data-name="Iron Sledgehammer" data-attack="12" data-element="normal" data-desc="A large iron sledgehammer, originally used for mining." data-img="https://i.imgur.com/QeZbWwN.png">
+      <img src="IMG/Mandoble Zora.webp" alt="">
+      <img class="element-icon" src="" alt="">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">12</div>
+    </div>
+    <div class="weapon" data-name="Traveler's Sword" data-attack="5" data-element="fire" data-desc="A common sword often kept by travelers." data-img="https://i.imgur.com/kY6tZkD.png">
+      <img src="IMG/Gran Espada de Fuego.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/V8bqZ9J.png" alt="Fire Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">5</div>
+    </div>
+    <div class="weapon" data-name="Rusty Broadsword" data-attack="6" data-element="ice" data-desc="A rusty sword with chipped edges." data-img="https://i.imgur.com/v5YmVkR.png">
+      <img src="IMG/Espada de Hielo.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/Y7b3FSK.png" alt="Ice Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">6</div>
+    </div>
+    <div class="weapon" data-name="Thunder Spear" data-attack="10" data-element="electric" data-desc="A spear crackling with electricity." data-img="https://i.imgur.com/3LpYcxG.png">
+      <img src="IMG/Cetro Relámpago.png" alt="">
+      <img class="element-icon" src="https://i.imgur.com/oLZl7Xr.png" alt="Electric Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">10</div>
+    </div>
+    <div class="weapon" data-name="Steel Longsword" data-attack="8" data-element="normal" data-desc="A reliable steel longsword." data-img="https://i.imgur.com/6tZxP7r.png">
+      <img src="IMG/Tridente Ceremonial.webp" alt="">
+      <img class="element-icon" src="" alt="">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">8</div>
+    </div>
+    <div class="weapon" data-name="Flame Dagger" data-attack="7" data-element="fire" data-desc="A small dagger imbued with fire." data-img="https://i.imgur.com/4gYg6wh.png">
+      <img src="IMG/Espada de Fuego.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/V8bqZ9J.png" alt="Fire Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">7</div>
+    </div>
+    <div class="weapon" data-name="Frost Axe" data-attack="9" data-element="ice" data-desc="An axe that chills enemies on contact." data-img="https://i.imgur.com/Mt5C7Ic.png">
+      <img src="IMG/Cetro Helado.png" alt="">
+      <img class="element-icon" src="https://i.imgur.com/Y7b3FSK.png" alt="Ice Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">9</div>
+    </div>
+    <div class="weapon" data-name="Volt Blade" data-attack="11" data-element="electric" data-desc="A sword that sparks electricity with each swing." data-img="https://i.imgur.com/8WmnEbb.png">
+      <img src="IMG/Espada de rayo.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/oLZl7Xr.png" alt="Electric Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">11</div>
+    </div>
+    <div class="weapon" data-name="Bronze Club" data-attack="4" data-element="normal" data-desc="A simple bronze club." data-img="https://i.imgur.com/AOZYHhg.png">
+      <img src="IMG/Machacarrocas.webp" alt="">
+      <img class="element-icon" src="" alt="">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">4</div>
+    </div>
+    <div class="weapon" data-name="Fire Bow" data-attack="9" data-element="fire" data-desc="A bow that shoots flaming arrows." data-img="https://i.imgur.com/uz8lmUP.png">
+      <img src="IMG/Cetro Abrazador.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/V8bqZ9J.png" alt="Fire Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">9</div>
+    </div>
+    <div class="weapon" data-name="Ice Bow" data-attack="9" data-element="ice" data-desc="A bow that shoots freezing arrows." data-img="https://i.imgur.com/Flc0xJx.png">
+      <img src="IMG/Lanza de Hielo.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/Y7b3FSK.png" alt="Ice Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">9</div>
+    </div>
+    <div class="weapon" data-name="Thunder Bow" data-attack="10" data-element="electric" data-desc="A bow that shoots electrified arrows." data-img="https://i.imgur.com/K8RgxKx.png">
+      <img src="IMG/Espada de rayo.webp" alt="">
+      <img class="element-icon" src="https://i.imgur.com/oLZl7Xr.png" alt="Electric Element">
+      <div class="attack"><img src="https://i.imgur.com/YsJ3lJ5.png">10</div>
+    </div>
+  </div>
+
+  <div class="weapon-info" id="weaponInfo">
+    <img src="IMG/Mandoble Zora.webp" alt="Selected Weapon" id="weaponImage">
+    <div class="weapon-name" id="weaponName">Iron Sledgehammer</div>
+    <div class="weapon-attack"><img src="https://i.imgur.com/YsJ3lJ5.png" alt=""> <span id="weaponAttack">12</span></div>
+    <div class="weapon-element" id="weaponElement" style="display:none;"><img src="" alt=""> <span id="weaponElementText"></span></div>
+    <div class="weapon-desc" id="weaponDesc">A large iron sledgehammer, originally used for mining.</div>
+  </div>
+</div>
+
+<script>
+  const weapons = document.querySelectorAll('.weapon');
+  const nameEl = document.getElementById('weaponName');
+  const attackEl = document.getElementById('weaponAttack');
+  const descEl = document.getElementById('weaponDesc');
+  const imgEl = document.getElementById('weaponImage');
+  const elementEl = document.getElementById('weaponElement');
+  const elementTextEl = document.getElementById('weaponElementText');
+
+  weapons.forEach(weapon => {
+    const icon = weapon.querySelector('.element-icon');
+    if(weapon.dataset.element !== 'normal') icon.style.display = 'block';
+
+    weapon.addEventListener('click', () => {
+      document.querySelector('.weapon.selected')?.classList.remove('selected');
+      weapon.classList.add('selected');
+
+      nameEl.textContent = weapon.dataset.name;
+      attackEl.textContent = weapon.dataset.attack;
+      descEl.textContent = weapon.dataset.desc;
+      imgEl.src = weapon.dataset.img;
+
+      if(weapon.dataset.element !== 'normal') {
+        elementEl.style.display = 'flex';
+        elementEl.querySelector('img').src = icon.src;
+        elementTextEl.textContent = weapon.dataset.element.toUpperCase();
+      } else {
+        elementEl.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
