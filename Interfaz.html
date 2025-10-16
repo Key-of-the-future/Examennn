@@ -39,6 +39,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    align-items: flex-start;
   }
 
   .hearts {
@@ -64,6 +65,7 @@
     gap: 8px;
     font-size: 1.2em;
     color: #0ff;
+    justify-content: flex-end;
   }
 
   .rupi-icon {
@@ -72,7 +74,7 @@
     background: url('IMG/Rupia.webp') no-repeat center/contain;
   }
 
-  /* MENU PRINCIPAL */
+
   .menu {
     display: flex;
     background: rgba(10, 15, 20, 0.8);
@@ -127,7 +129,7 @@
     position: absolute;
     bottom: 5px;
     right: 8px;
-    font-size: 0.9em;
+    font-size: 1.5em;
     display: flex;
     align-items: center;
     gap: 4px;
@@ -184,7 +186,6 @@
 </head>
 <body>
 
-<!-- HUD -->
 <div class="hud">
   <div class="hud-left">
     <div class="hearts" id="hearts">
@@ -205,68 +206,67 @@
   </div>
   <div class="hud-right">
     <div class="rupi-icon"></div>
-    <span id="rupees">13214</span>
+    <span id="rupees">1324</span>
   </div>
 </div>
 
-<!-- MENU PRINCIPAL -->
 <div class="menu">
   <div class="weapon-grid" id="weaponGrid">
-    <!-- Armas (12) -->
-    <div class="weapon selected" data-name="Iron Sledgehammer" data-attack="12" data-desc="A large iron sledgehammer, originally used for mining." data-img="IMG/Mandoble Zora.webp">
+
+    <div class="weapon selected" data-name="Mandoble Zora" data-attack="12" data-desc="¨Espada zora forjada con un metal especial. Dado que los miembros de la tribu prefieren las lanzas, es un arma poco común entre ellos, aunque popular entre los hylianos.¨" data-img="IMG/Mandoble Zora.webp">
       <img src="IMG/Mandoble Zora.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">12</div>
+      <div class="attack">12</div>
     </div>
-    <div class="weapon" data-name="Traveler's Sword" data-attack="5" data-desc="A common sword often kept by travelers." data-img="IMG/Gran Espada de Fuego.webp">
+    <div class="weapon" data-name="Gran Espada de Fuego" data-attack="5" data-desc="¨Espada mágica que se dice forjaron herreros goron en una época pasada en las llamas de la Montaña de la Muerte. Emite llamas al usarla cuando la hoja brilla con un tono rojo.¨" data-img="IMG/Gran Espada de Fuego.webp">
       <img src="IMG/Gran Espada de Fuego.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">5</div>
+      <div class="attack">5</div>
     </div>
-    <div class="weapon" data-name="Rusty Broadsword" data-attack="6" data-desc="A rusty sword with chipped edges." data-img="IMG/Espada de Hielo.webp">
+    <div class="weapon" data-name="Espada de Hielo" data-attack="6" data-desc="¨Espada mágica forjada en las frías montañas de la región de Hebra. Si la hoja se vuelve azul por completo, adquiere el poder de congelar al enemigo.¨" data-img="IMG/Espada de Hielo.webp">
       <img src="IMG/Espada de Hielo.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">6</div>
+      <div class="attack">6</div>
     </div>
-    <div class="weapon" data-name="Thunder Spear" data-attack="10" data-desc="A spear crackling with electricity." data-img="IMG/Cetro Relámpago.png">
+    <div class="weapon" data-name="Cetro relámpago" data-attack="10" data-desc="A spear crackling with electricity." data-img="IMG/Cetro Relámpago.png">
       <img src="IMG/Cetro Relámpago.png" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">10</div>
+      <div class="attack">10</div>
     </div>
-    <div class="weapon" data-name="Steel Longsword" data-attack="8" data-desc="A reliable steel longsword." data-img="IMG/Tridente Ceremonial.webp">
+    <div class="weapon" data-name="Tridente Ceremonial" data-attack="8" data-desc="¨Arma inspirada en el tridente de escamas que empleaba Mipha. Su potencia de ataque y resistencia son sensiblemente inferiores al modelo original.¨" data-img="IMG/Tridente Ceremonial.webp">
       <img src="IMG/Tridente Ceremonial.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">8</div>
+      <div class="attack">8</div>
     </div>
-    <div class="weapon" data-name="Flame Dagger" data-attack="7" data-desc="A small dagger imbued with fire." data-img="IMG/Espada de Fuego.webp">
+    <div class="weapon" data-name="Espada de Fuego" data-attack="7" data-desc="¨Espada mágica forjada con lava de la Montaña de la Muerte. Si la hoja se vuelve roja por completo, desprende llamas blanquecinas al blandirla.¨" data-img="IMG/Espada de Fuego.webp">
       <img src="IMG/Espada de Fuego.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">7</div>
+      <div class="attack">7</div>
     </div>
-    <div class="weapon" data-name="Frost Axe" data-attack="9" data-desc="An axe that chills enemies on contact." data-img="IMG/Cetro Helado.png">
+    <div class="weapon" data-name="Cetro Glacial" data-attack="9" data-desc="¨Un cetro mágico que puede lanzar un frío extremo en un rango amplio. Son elaborados de hielo refinado encontrado en la cumbre del Pico Hebra.¨" data-img="IMG/Cetro Helado.png">
       <img src="IMG/Cetro Helado.png" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">9</div>
+      <div class="attack">9</div>
     </div>
-    <div class="weapon" data-name="Volt Blade" data-attack="11" data-desc="A sword that sparks electricity with each swing." data-img="IMG/Espada de rayo.webp">
+    <div class="weapon" data-name="Espada del Rayo" data-attack="11" data-desc="¨Espada mágica forjada con rayos de las colinas de Hyrule. Si la hoja se vuelve dorada por completo, adquiere el poder de electrocutar al enemigo.¨" data-img="IMG/Espada de rayo.webp">
       <img src="IMG/Espada de rayo.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">11</div>
+      <div class="attack">11</div>
     </div>
-    <div class="weapon" data-name="Bronze Club" data-attack="4" data-desc="A simple bronze club." data-img="IMG/Machacarrocas.webp">
+    <div class="weapon" data-name="Machacarrocas" data-attack="4" data-desc="¨Sólida arma a dos manos que en su día blandió Daruk. Dado que se diseño especialmente para él, no resulta muy manejable para los hylianos.¨" data-img="IMG/Machacarrocas.webp">
       <img src="IMG/Machacarrocas.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">4</div>
+      <div class="attack">4</div>
     </div>
-    <div class="weapon" data-name="Fire Bow" data-attack="9" data-desc="A bow that shoots flaming arrows." data-img="IMG/Cetro Abrazador.webp">
+    <div class="weapon" data-name="Cetro Abrazador" data-attack="9" data-desc="A bow that shoots flaming arrows." data-img="IMG/Cetro Abrazador.webp">
       <img src="IMG/Cetro Abrazador.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">9</div>
+      <div class="attack">9</div>
     </div>
-    <div class="weapon" data-name="Ice Bow" data-attack="9" data-desc="A bow that shoots freezing arrows." data-img="IMG/Lanza de Hielo.webp">
+    <div class="weapon" data-name="Lanza de Hielo" data-attack="9" data-desc="¨Lanza mágica forjada con hielo extraído de la cordillera de Hebra. Si la hoja se vuelve azul por completo, adquiere el poder de congelar al enemigo.¨" data-img="IMG/Lanza de Hielo.webp">
       <img src="IMG/Lanza de Hielo.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">9</div>
+      <div class="attack">9</div>
     </div>
-    <div class="weapon" data-name="Thunder Bow" data-attack="10" data-desc="A bow that shoots electrified arrows." data-img="IMG/Espada de rayo.webp">
-      <img src="IMG/Espada de rayo.webp" alt="">
-      <div class="attack"><img src="IMG/AttackIcon.png">10</div>
+    <div class="weapon" data-name="Lanza del Trueno" data-attack="10" data-desc="¨Lanza mágica forjada con rayos en la meseta del trueno. Si la hoja se vuelve dorada por completo, adquiere el poder de electrocutar al enemigo.¨" data-img="IMG/lanza de Trueno.webp">
+      <img src="IMG/Lanza de Trueno.webp" alt="">
+      <div class="attack">10</div>
     </div>
   </div>
 
   <div class="weapon-info" id="weaponInfo">
     <img src="IMG/Mandoble Zora.webp" alt="Selected Weapon" id="weaponImage">
-    <div class="weapon-name" id="weaponName">Iron Sledgehammer</div>
-    <div class="weapon-attack"><img src="IMG/AttackIcon.png" alt=""> <span id="weaponAttack">12</span></div>
+    <div class="weapon-name" id="weaponName">Mandoble Zora</div>
+    <div class="weapon-attack"><span id="weaponAttack">12</span></div>
     <div class="weapon-desc" id="weaponDesc">A large iron sledgehammer, originally used for mining.</div>
   </div>
 </div>
@@ -286,7 +286,6 @@
     attackEl.textContent = weapon.dataset.attack;
     descEl.textContent = weapon.dataset.desc;
 
-    // Cambiar la imagen del panel derecho
     imgEl.src = weapon.dataset.img;
   }
 
@@ -294,7 +293,6 @@
     weapon.addEventListener('click', () => selectWeapon(weapon));
   });
 
-  // Selección inicial al cargar la página
   const initiallySelected = document.querySelector('.weapon.selected');
   if(initiallySelected) selectWeapon(initiallySelected);
 </script>
