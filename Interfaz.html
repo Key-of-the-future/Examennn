@@ -316,7 +316,7 @@
 
     weapon.addEventListener('click', () => {
       document.querySelector('.weapon.selected')?.classList.remove('selected');
-      weapon.classList.add('selected');
+      weapon.classList.add('selected'); 
 
       nameEl.textContent = weapon.dataset.name;
       attackEl.textContent = weapon.dataset.attack;
